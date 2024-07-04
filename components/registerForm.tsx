@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import axios from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,10 +13,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 const FormSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
   email: z.string().email().min(2, {
     message: "Email must be at least 2 characters.",
   }),
@@ -25,25 +28,34 @@ const FormSchema = z.object({
   }),
 });
 
-export default function LoginForm() {
-  const [user, setUser] = useState(null);
+export default function RegisterForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "hr@gmail.com", // remove later
-      password: "123456seven", // remove later
+      username: "tuna", // remove later
+      email: "t@gmail.com", // remove later
+      password: "123456", // remove later
     },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/login",
-        data,
-      );
-      setUser(res.data);
+      const res = await axios.post("/auth/register", data);
       console.log(res.data);
-    } catch (error) {}
+      if (res.status === 200) {
+        toast({
+          title: "Registration successful! 🎉",
+          description: "You can now login with your username and password.",
+        });
+      }
+    } catch (error: any) {
+      console.error(error);
+      toast({
+        title: "Registration failed! 😢",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -54,6 +66,28 @@ export default function LoginForm() {
       >
         <FormField
           control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Username <span className="text-blue-400">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter your username"
+                  type="text"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>
+                We&apos;ll never share your username with anyone else.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -61,12 +95,7 @@ export default function LoginForm() {
                 Email <span className="text-blue-400">*</span>
               </FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your email"
-                  type="email"
-                  {...field}
-                  autoComplete="email"
-                />
+                <Input placeholder="Enter your email" type="email" {...field} />
               </FormControl>
               <FormDescription>
                 We&apos;ll never share your email with anyone else.
@@ -85,7 +114,6 @@ export default function LoginForm() {
                 <Input
                   placeholder="Enter password"
                   type="password"
-                  autoComplete="current-password"
                   {...field}
                 />
               </FormControl>

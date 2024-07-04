@@ -1,10 +1,11 @@
 import React from "react";
 import LoginForm from "@/components/loginForm";
 import Link from "next/link";
+import RegisterForm from "@/components/registerForm";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-black">
+    <div className="flex min-h-screen w-full items-center justify-center bg-black">
       <div className="flex flex-col items-center gap-4 rounded-xl bg-white p-10">
         <h1 className="text-4xl font-semibold">
           Welcome to{" "}
@@ -12,11 +13,11 @@ export default function LoginPage() {
             Playable Factory!
           </Link>
         </h1>
-        <LoginForm />
+        <RegisterForm />
         <span>
-          Don&apos;t have an account?{" "}
-          <Link href="/register" className="text-blue-500">
-            Register
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-500">
+            Login
           </Link>
         </span>
       </div>
