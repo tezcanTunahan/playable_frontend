@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { useAuth } from "@/context/authContext";
 
 export default function Navbar() {
+  const { username } = useAuth();
   return (
     <div className="mb-20 flex w-full items-start justify-between">
       <div className="flex flex-col">

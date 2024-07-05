@@ -14,12 +14,14 @@ import { toast } from "@/components/ui/use-toast";
 
 type AuthContextType = {
   username?: string;
+  isAuth?: boolean;
   token?: string | null;
   login: (email: string, password: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
   username: "",
+  isAuth: false,
   token: "",
   login: () => {},
 });
@@ -36,6 +38,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const { push } = useRouter();
   const [token, setToken] = useState<string | null>(null);
   const [username, setUsername] = useState<string>("");
+  const [isAuth, setIsAuth] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchMe = async () => {
