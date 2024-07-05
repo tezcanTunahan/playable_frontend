@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Landing() {
@@ -13,8 +14,10 @@ export default function Landing() {
         JWT for authentication.
         <br />
         please click on{" "}
-        <span className="font-semibold text-blue-600">login</span> to get
-        started
+        <Link href="/login" className="font-semibold text-blue-600">
+          login
+        </Link>{" "}
+        to get started
       </p>
     </div>
   );

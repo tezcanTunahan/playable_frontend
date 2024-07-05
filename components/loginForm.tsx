@@ -25,12 +25,12 @@ const FormSchema = z.object({
 });
 
 export default function LoginForm() {
-  const { login, token } = useAuth();
+  const { login } = useAuth();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "hr@gmail.com", // remove later
-      password: "123456seven", // remove later
+      email: "t@gmail.com", // remove later
+      password: "123456", // remove later
     },
   });
 
