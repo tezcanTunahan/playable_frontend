@@ -8,14 +8,18 @@ import {
   useLayoutEffect,
 } from "react";
 import api from "@/lib/api";
+import { useRouter } from "next/navigation";
+
 import { toast } from "@/components/ui/use-toast";
 
 type AuthContextType = {
+  username?: string;
   token?: string | null;
   login: (email: string, password: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
+  username: "",
   token: "",
   login: () => {},
 });
@@ -29,7 +33,9 @@ type AuthProviderProps = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const { push } = useRouter();
   const [token, setToken] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>("");
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -42,6 +48,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     };
     fetchMe();
+  }, []);
+  //  check if token is present in local storage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
   }, []);
 
   useLayoutEffect(() => {
@@ -65,11 +76,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
       });
       if (res.status === 200) {
+        setUsername(res.data.username);
+        localStorage.setItem("token", res.data.accessToken);
         toast({
           title: "Login successful! 🎉",
           description:
             "You have successfully logged in. Redirecting you to the dashboard.",
         });
+        setTimeout(() => {
+          push("/");
+        }, 500);
       }
       setToken(res.data.accessToken);
     } catch (error: any) {
@@ -84,6 +100,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const value = {
     token,
     login,
+    username,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
