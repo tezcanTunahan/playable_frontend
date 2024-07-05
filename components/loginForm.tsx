@@ -1,8 +1,6 @@
 "use client";
-import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
 import { z } from "zod";
 import {
   Form,
@@ -15,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useAuth } from "@/context/authContext";
 
 const FormSchema = z.object({
   email: z.string().email().min(2, {
@@ -27,7 +25,7 @@ const FormSchema = z.object({
 });
 
 export default function LoginForm() {
-  const [user, setUser] = useState(null);
+  const { login, token } = useAuth();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -37,23 +35,7 @@ export default function LoginForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    try {
-      const res = await api.post("/auth/login", data);
-      setUser(res.data);
-      if (res.status === 200) {
-        toast({
-          title: "Login successful! 🎉",
-          description:
-            "You have successfully logged in. Redirecting you to the dashboard.",
-        });
-      }
-    } catch (err: any) {
-      console.error(err);
-      toast({
-        title: "An error occurred.",
-        description: err.response?.data.message,
-      });
-    }
+    login(data.email, data.password);
   }
 
   return (

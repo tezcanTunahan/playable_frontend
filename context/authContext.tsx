@@ -5,21 +5,19 @@ import {
   useEffect,
   useState,
   ReactNode,
+  useLayoutEffect,
 } from "react";
 import api from "@/lib/api";
-
-type User = {
-  username: string;
-  accessToken: string;
-  refreshToken: string;
-};
+import { toast } from "@/components/ui/use-toast";
 
 type AuthContextType = {
-  user?: User;
+  token?: string | null;
+  login: (email: string, password: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
-  user: undefined,
+  token: "",
+  login: () => {},
 });
 
 export function useAuth() {
@@ -31,10 +29,61 @@ type AuthProviderProps = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get("/auth/me");
+        setToken(res.data.access_token);
+      } catch (error: any) {
+        setToken(null);
+        console.error(error);
+      }
+    };
+    fetchMe();
+  }, []);
+
+  useLayoutEffect(() => {
+    // @ts-ignore
+    const authInterceptor = api.interceptors.request.use((config) => {
+      config.headers.authorization = token
+        ? `Bearer ${token}`
+        : config.headers.authorization;
+      return config;
+    });
+
+    return () => {
+      api.interceptors.request.eject(authInterceptor);
+    };
+  }, [token]);
+
+  const login = async (email: string, password: string) => {
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+      if (res.status === 200) {
+        toast({
+          title: "Login successful! 🎉",
+          description:
+            "You have successfully logged in. Redirecting you to the dashboard.",
+        });
+      }
+      setToken(res.data.accessToken);
+    } catch (error: any) {
+      console.error(error);
+      toast({
+        title: "An error occurred.",
+        description: error.response?.data.message,
+      });
+    }
+  };
 
   const value = {
-    user,
+    token,
+    login,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
