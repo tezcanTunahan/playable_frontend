@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "@/components/ui/use-toast";
@@ -38,10 +38,7 @@ export default function LoginForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/login",
-        data,
-      );
+      const res = await api.post("/auth/login", data);
       setUser(res.data);
       if (res.status === 200) {
         toast({

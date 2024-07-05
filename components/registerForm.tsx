@@ -1,5 +1,5 @@
 "use client";
-import axios from "@/lib/api";
+import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,7 +40,7 @@ export default function RegisterForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post("/auth/register", data);
+      const res = await api.post("/auth/register", data);
       console.log(res.data);
       if (res.status === 200) {
         toast({

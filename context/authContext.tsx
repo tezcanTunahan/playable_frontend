@@ -6,7 +6,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import axios from "@/lib/api";
+import api from "@/lib/api";
 
 type User = {
   username: string;
