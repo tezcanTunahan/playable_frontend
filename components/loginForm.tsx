@@ -2,6 +2,7 @@
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "@/components/ui/use-toast";
 import { z } from "zod";
 import {
   Form,
@@ -42,8 +43,20 @@ export default function LoginForm() {
         data,
       );
       setUser(res.data);
-      console.log(res.data);
-    } catch (error) {}
+      if (res.status === 200) {
+        toast({
+          title: "Login successful! 🎉",
+          description:
+            "You have successfully logged in. Redirecting you to the dashboard.",
+        });
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast({
+        title: "An error occurred.",
+        description: err.response?.data.message,
+      });
+    }
   }
 
   return (

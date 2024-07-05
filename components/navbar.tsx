@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <div className="flex w-full items-start justify-between p-10">
+    <div className="mb-20 flex w-full items-start justify-between">
       <div className="flex flex-col">
         <Link href="/" className="text-2xl font-bold">
           PLAYABLE <span className="text-purple-500">FACTORY</span>
