@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar";
 import api from "@/lib/api";
 export default function Home() {
   const handleClick = async () => {
-    api.get("/users").then((res) => console.log(res));
+    api.get("/users/me").then((res) => console.log(res));
   };
 
   return (

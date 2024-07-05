@@ -1,109 +1,82 @@
 "use client";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-  useLayoutEffect,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 
-import { toast } from "@/components/ui/use-toast";
-
-type AuthContextType = {
-  username?: string;
-  isAuth?: boolean;
-  token?: string | null;
-  login: (email: string, password: string) => void;
-};
-
-const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext({
   username: "",
-  isAuth: false,
-  token: "",
-  login: () => {},
+  authState: {
+    token: "",
+    authenticated: false,
+  },
+  setAuthState: (authState: any) => {},
+  login: (email: string, password: string) => {},
+  logout: () => {},
 });
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
-type AuthProviderProps = {
-  children: ReactNode;
-};
-
-export function AuthProvider({ children }: AuthProviderProps) {
+export function AuthProvider({ children }: any) {
   const { push } = useRouter();
-  const [token, setToken] = useState<string | null>(null);
-  const [username, setUsername] = useState<string>("");
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  const [username, setUsername] = useState("");
+  const [authState, setAuthState] = useState({
+    token: "",
+    authenticated: false,
+  });
 
   useEffect(() => {
-    const fetchMe = async () => {
-      try {
-        const res = await api.get("/auth/me");
-        setToken(res.data.access_token);
-      } catch (error: any) {
-        setToken(null);
-        console.error(error);
-      }
-    };
-    fetchMe();
-  }, []);
-  //  check if token is present in local storage
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setToken(token);
-  }, []);
-
-  useLayoutEffect(() => {
-    // @ts-ignore
-    const authInterceptor = api.interceptors.request.use((config) => {
-      config.headers.authorization = token
-        ? `Bearer ${token}`
-        : config.headers.authorization;
-      return config;
-    });
-
-    return () => {
-      api.interceptors.request.eject(authInterceptor);
-    };
-  }, [token]);
-
-  const login = async (email: string, password: string) => {
-    try {
-      const res = await api.post("/auth/login", {
-        email,
-        password,
-      });
-      if (res.status === 200) {
-        setUsername(res.data.username);
-        localStorage.setItem("token", res.data.accessToken);
-        toast({
-          title: "Login successful! 🎉",
-          description:
-            "You have successfully logged in. Redirecting you to the dashboard.",
+    const loadToken = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        // @ts-ignore
+        api.interceptors.request.use(async (config) => {
+          config.headers["authorization"] = "Bearer " + token;
+          return config;
         });
-        setTimeout(() => {
-          push("/");
-        }, 500);
+        api
+          .get("/users/me")
+          .then((res) => {
+            setUsername(res.data.username);
+          })
+          .catch((err) => {
+            logout();
+            console.error(err);
+          });
+        setAuthState({ token, authenticated: true });
       }
-      setToken(res.data.accessToken);
-    } catch (error: any) {
-      console.error(error);
-      toast({
-        title: "An error occurred.",
-        description: error.response?.data.message,
+    };
+    loadToken();
+  }, [authState.authenticated]);
+
+  const login = (email: string, password: string) => {
+    api
+      .post("/auth/login", { email, password })
+      .then((res) => {
+        const token = res.data.accessToken;
+        localStorage.setItem("token", token);
+        setAuthState({ token, authenticated: true });
+        push("/");
+      })
+      .catch((err) => {
+        console.error(err);
       });
-    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setAuthState({ token: "", authenticated: false });
   };
 
   const value = {
-    token,
-    login,
     username,
+    login,
+    authState,
+    setAuthState,
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

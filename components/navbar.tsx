@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { useAuth } from "@/context/authContext";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
-  const { username } = useAuth();
+  const { authState, username, logout } = useAuth();
   return (
     <div className="mb-20 flex w-full items-start justify-between">
       <div className="flex flex-col">
@@ -21,9 +22,19 @@ export default function Navbar() {
         </span>
       </div>
 
-      <Link href="/login" className="text-xl font-semibold">
-        Login
-      </Link>
+      {authState.authenticated ? (
+        <div className="flex items-center">
+          <span className="mr-4">{username}</span>
+          <Button onClick={logout}>Logout</Button>
+        </div>
+      ) : (
+        <div className="flex items-center">
+          <Link href="/login" className="mr-4">
+            Login
+          </Link>
+          <Link href="/register">Register</Link>
+        </div>
+      )}
     </div>
   );
 }
