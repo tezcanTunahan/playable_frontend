@@ -8,7 +8,13 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
-export default function CreateTodo({ className }: { className?: string }) {
+export default function CreateTodo({
+  className,
+  createTodo,
+}: {
+  className?: string;
+  createTodo: (title: string, desc: string, img: File | null) => void;
+}) {
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [img, setImg] = React.useState<File | null>(null);
@@ -28,11 +34,10 @@ export default function CreateTodo({ className }: { className?: string }) {
   };
 
   const handleClick = async () => {
-    api.post("/todo", { title, desc, img: "selam" }).then(() => {
-      setTitle("");
-      setDesc("");
-      setImg(null);
-    });
+    createTodo(title, desc, img);
+    setTitle("");
+    setDesc("");
+    setImg(null);
   };
 
   return (

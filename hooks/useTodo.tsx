@@ -24,7 +24,11 @@ export function useTodo() {
     fetchTodos();
   }, [fetchTodos]);
 
-  function createTodo() {}
+  function createTodo(title: string, desc: string, img: File | null) {
+    api.post("/todo", { title, desc, img: "selam" }).then(() => {
+      fetchTodos();
+    });
+  }
 
-  return { todos };
+  return { todos, createTodo };
 }
