@@ -22,7 +22,7 @@ export default function TodoList() {
   }, [fetchTodos, username]);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {todos.map((todo: any, index) => (
         <Todo
           key={index}

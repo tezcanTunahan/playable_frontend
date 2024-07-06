@@ -104,9 +104,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         title: "Login Successful 🎉",
         description: "Welcome back! Redirecting to home page...",
       });
-      setTimeout(() => {
-        push("/");
-      }, 400);
+      push("/");
     } catch (err: any) {
       console.error(err);
       toast({

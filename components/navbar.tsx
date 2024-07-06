@@ -16,6 +16,7 @@ export default function Navbar() {
           <Link
             href="https://www.linkedin.com/in/tunahantezcan/"
             className="text-blue-500"
+            target="_blank"
           >
             @tunahantzcn
           </Link>

@@ -3,7 +3,6 @@ import Landing from "@/components/landing";
 import Navbar from "@/components/navbar";
 import Todos from "@/components/todos/todos";
 import { useAuth } from "@/context/authContext";
-import api from "@/lib/api";
 export default function Home() {
   const { authState } = useAuth();
 

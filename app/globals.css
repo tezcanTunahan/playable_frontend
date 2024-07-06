@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Büyük ekranlar için */
+html {
+  font-size: 16px;
+}
+
+/* Tabletler için */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Büyük telefonlar için */
+@media (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Küçük telefonlar için */
+@media (max-width: 400px) {
+  html {
+    font-size: 10px;
+  }
+}
