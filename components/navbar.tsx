@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 export default function Navbar() {
   const { authState, username, logout } = useAuth();
   return (
-    <div className="mb-20 flex w-full items-start justify-between">
+    <div className="mb-10 flex w-full items-start justify-between">
       <div className="flex flex-col">
         <Link href="/" className="text-2xl font-bold">
           PLAYABLE <span className="text-purple-500">FACTORY</span>
@@ -33,7 +33,6 @@ export default function Navbar() {
           <Link href="/login" className="mr-4">
             Login
           </Link>
-          <Link href="/register">Register</Link>
         </div>
       )}
     </div>

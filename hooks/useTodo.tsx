@@ -30,5 +30,17 @@ export function useTodo() {
     });
   }
 
-  return { todos, createTodo };
+  function deleteTodo({ id }: { id: string }) {
+    api.delete(`/todo/${id}`).then(() => {
+      fetchTodos();
+    });
+  }
+
+  function changeTodoStatus({ id }: { id: string }) {
+    api.patch(`/todo/${id}`).then(() => {
+      fetchTodos();
+    });
+  }
+
+  return { todos, createTodo, deleteTodo, changeTodoStatus };
 }
