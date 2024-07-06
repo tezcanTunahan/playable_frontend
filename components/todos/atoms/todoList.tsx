@@ -2,7 +2,9 @@ import React, { useCallback, useEffect } from "react";
 import Todo from "./todo";
 import api from "@/lib/api";
 import { useAuth } from "@/context/authContext";
-export default function TodoList() {
+import { cn } from "@/lib/utils";
+
+export default function TodoList({ className }: { className?: string }) {
   const [todos, setTodos] = React.useState([]);
   const { username } = useAuth();
 
@@ -22,7 +24,7 @@ export default function TodoList() {
   }, [fetchTodos, username]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={cn("flex flex-col gap-4", className)}>
       {todos.map((todo: any, index) => (
         <Todo
           key={index}
