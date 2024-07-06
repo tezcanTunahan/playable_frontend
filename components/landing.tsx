@@ -19,6 +19,13 @@ export default function Landing() {
         </Link>{" "}
         to get started
       </p>
+      {/* missing parts */}
+      <ul className="list-inside list-disc text-lg text-gray-700">
+        <li className="text-red-500">
+          I didn&apos;t implement refresh token mechanism, its just access
+          token.
+        </li>
+      </ul>
     </div>
   );
 }
