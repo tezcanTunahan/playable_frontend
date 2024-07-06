@@ -62,7 +62,14 @@ export default function Landing() {
           WebSockets. I never use websockets before, so I just guess it might
           be.
         </li>
-
+        <li>
+          pagination is not implemented. so if a user has a lot of todos, it
+          will be hard to manage them.
+        </li>
+        <li>
+          user can change todo status by clicking on the todo card. but user
+          cant change the todo title or description.
+        </li>
         <li className="">
           I think 2 days is not enough for me to learn and implement all the
           features that I want to implement.

@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import api from "@/lib/api";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
@@ -33,7 +32,12 @@ export default function CreateTodo({
     }
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async (
+    e:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
     createTodo(title, desc, img);
     setTitle("");
     setDesc("");
@@ -41,11 +45,12 @@ export default function CreateTodo({
   };
 
   return (
-    <div
+    <form
       className={cn(
         "flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-20 dark:border-slate-800 dark:bg-slate-950",
         className,
       )}
+      onSubmit={handleSubmit}
     >
       <Label>Todo title</Label>
       <Input
@@ -79,7 +84,7 @@ export default function CreateTodo({
         onChange={handleContentChange}
         placeholder="Todo description"
       />
-      <Button onClick={handleClick}>Create todo</Button>
-    </div>
+      <Button type="submit">Create todo</Button>
+    </form>
   );
 }
