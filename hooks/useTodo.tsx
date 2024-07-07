@@ -1,5 +1,7 @@
 import api from "@/lib/api";
 import { useCallback, useEffect, useState } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "@/lib/firebase";
 
 type Todo = {
   title: string;
@@ -9,6 +11,7 @@ type Todo = {
 
 export function useTodo() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [loading, setLoading] = useState(false);
   const fetchTodos = useCallback(async () => {
     setTodos([]);
     try {
@@ -24,10 +27,29 @@ export function useTodo() {
     fetchTodos();
   }, [fetchTodos]);
 
-  function createTodo(title: string, desc: string, img: File | null) {
-    api.post("/todo", { title, desc, img: "selam" }).then(() => {
-      fetchTodos();
-    });
+  async function createTodo(title: string, desc: string, file: File) {
+    // const filename = Date.now() + file.name;
+    if (!file) {
+      alert("Please upload an image");
+      return;
+    }
+    const storageRef = ref(storage, `images/${file.name}`);
+    try {
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      console.log("File available at", url);
+      api
+        .post("/todo", {
+          title,
+          desc,
+          img: url,
+        })
+        .then(() => {
+          fetchTodos();
+        });
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
   }
 
   function deleteTodo({ id }: { id: string }) {

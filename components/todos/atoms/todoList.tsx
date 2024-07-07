@@ -29,6 +29,7 @@ export default function TodoList({
           desc={todo.desc}
           status={todo.status}
           deleteTodo={deleteTodo}
+          img={todo.img}
           id={todo._id}
           changeTodoStatus={changeTodoStatus}
         />
