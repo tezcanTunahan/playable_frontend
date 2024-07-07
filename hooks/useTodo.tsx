@@ -2,6 +2,7 @@ import api from "@/lib/api";
 import { useCallback, useEffect, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
+import { toast } from "@/components/ui/use-toast";
 
 type Todo = {
   title: string;
@@ -31,10 +32,23 @@ export function useTodo() {
   async function createTodo(title: string, desc: string, file: File | null) {
     setLoading(true);
     if (!file) {
-      alert("Please upload an image");
+      toast({
+        title: "Error",
+        description: "Please upload an image",
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    } else if (!title || !desc) {
+      toast({
+        title: "Error",
+        description: "Please fill out all fields",
+        variant: "destructive",
+      });
       setLoading(false);
       return;
     }
+
     const storageRef = ref(storage, `images/${file.name}`);
     try {
       await uploadBytes(storageRef, file);
