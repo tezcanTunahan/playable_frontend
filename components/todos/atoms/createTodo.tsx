@@ -16,7 +16,7 @@ export default function CreateTodo({
 }) {
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
-  const [img, setImg] = React.useState<File | null>();
+  const [img, setImg] = React.useState<File | null>(null);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -29,6 +29,8 @@ export default function CreateTodo({
   const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImg(e.target.files[0]);
+    } else {
+      setImg(null);
     }
   };
 

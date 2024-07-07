@@ -7,6 +7,7 @@ type Todo = {
   title: string;
   desc: string;
   status: string;
+  img: string;
 };
 
 export function useTodo() {
