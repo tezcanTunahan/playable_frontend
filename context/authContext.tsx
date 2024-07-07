@@ -67,6 +67,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem("token");
   }, [toast, push]);
 
+  // after 1 hour, the token will expire and the user will be logged out
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (authState.authenticated) {
+        logout();
+      }
+    }, 3600000);
+    return () => clearInterval(interval);
+  }, [authState.authenticated, logout]);
+
   useEffect(() => {
     const loadToken = async () => {
       const token = localStorage.getItem("token");

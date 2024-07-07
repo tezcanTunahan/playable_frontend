@@ -6,7 +6,7 @@ import Image from "next/image";
 
 type TodoProps = {
   todo: {
-    id: string;
+    _id: string;
     title: string;
     desc: string;
     status: boolean;
@@ -33,13 +33,13 @@ export default function Todo({
           id="terms2"
           checked={todo.status}
           className="h-8 w-8"
-          onClick={() => changeTodoStatus({ id: todo.id })}
+          onClick={() => changeTodoStatus({ id: todo._id })}
         />
         <Button
           variant="destructive"
           size="icon"
           className=""
-          onClick={() => deleteTodo({ id: todo.id })}
+          onClick={() => deleteTodo({ id: todo._id })}
         >
           <CiTrash />
         </Button>
