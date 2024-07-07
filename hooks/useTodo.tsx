@@ -32,6 +32,7 @@ export function useTodo() {
     setLoading(true);
     if (!file) {
       alert("Please upload an image");
+      setLoading(false);
       return;
     }
     const storageRef = ref(storage, `images/${file.name}`);

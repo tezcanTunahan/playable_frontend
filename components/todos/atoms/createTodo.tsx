@@ -10,9 +10,11 @@ import React from "react";
 export default function CreateTodo({
   className,
   createTodo,
+  loading,
 }: {
   className?: string;
   createTodo: (title: string, desc: string, img: File | null) => void;
+  loading: boolean;
 }) {
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
@@ -86,7 +88,9 @@ export default function CreateTodo({
         onChange={handleContentChange}
         placeholder="Todo description"
       />
-      <Button type="submit">Create todo</Button>
+      <Button type="submit" disabled={loading}>
+        Create todo
+      </Button>
     </form>
   );
 }
