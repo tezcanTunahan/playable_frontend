@@ -25,12 +25,8 @@ export default function TodoList({
       {todos.map((todo: any, index) => (
         <Todo
           key={index}
-          title={todo.title}
-          desc={todo.desc}
-          status={todo.status}
+          todo={todo}
           deleteTodo={deleteTodo}
-          img={todo.img}
-          id={todo._id}
           changeTodoStatus={changeTodoStatus}
         />
       ))}

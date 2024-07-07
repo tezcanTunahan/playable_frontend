@@ -27,8 +27,8 @@ export function useTodo() {
     fetchTodos();
   }, [fetchTodos]);
 
-  async function createTodo(title: string, desc: string, file: File) {
-    // const filename = Date.now() + file.name;
+  async function createTodo(title: string, desc: string, file: File | null) {
+    setLoading(true);
     if (!file) {
       alert("Please upload an image");
       return;
@@ -49,6 +49,8 @@ export function useTodo() {
         });
     } catch (error) {
       console.error("Error uploading file:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -64,5 +66,5 @@ export function useTodo() {
     });
   }
 
-  return { todos, createTodo, deleteTodo, changeTodoStatus };
+  return { todos, createTodo, deleteTodo, changeTodoStatus, loading };
 }
