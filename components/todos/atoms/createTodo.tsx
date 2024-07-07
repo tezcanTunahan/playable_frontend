@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function CreateTodo({
   className,
@@ -18,6 +18,7 @@ export default function CreateTodo({
 }) {
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [img, setImg] = React.useState<File | null>(null);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +47,9 @@ export default function CreateTodo({
     setTitle("");
     setDesc("");
     setImg(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
@@ -70,6 +74,7 @@ export default function CreateTodo({
             accept="image/*"
             onChange={handlePictureChange}
             placeholder="Upload picture"
+            ref={fileInputRef}
           />
           {img && (
             <Image
