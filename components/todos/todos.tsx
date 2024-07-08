@@ -8,15 +8,15 @@ import Search from "./atoms/search";
 export default function Todos() {
   const {
     todos,
+    loading,
+    page,
+    totalPages,
     createTodo,
     deleteTodo,
     changeTodoStatus,
-    loading,
-    page,
     nextPage,
     prevPage,
     setSearch,
-    totalPages,
   } = useTodo();
   return (
     <div className="flex flex-col gap-10 md:flex-row">

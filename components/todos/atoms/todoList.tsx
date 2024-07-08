@@ -18,8 +18,6 @@ export default function TodoList({
   deleteTodo: ({ id }: { id: string }) => void;
   changeTodoStatus: ({ id }: { id: string }) => void;
 }) {
-  console.log(todos);
-
   return (
     <div className={cn("flex flex-col gap-4", className)}>
       {todos.length > 0 ? (

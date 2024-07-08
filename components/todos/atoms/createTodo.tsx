@@ -13,7 +13,7 @@ export default function CreateTodo({
   loading,
 }: {
   className?: string;
-  createTodo: (title: string, desc: string, img: File | null) => void;
+  createTodo: (title: string, desc: string, img: File | null) => Promise<void>;
   loading: boolean;
 }) {
   const [title, setTitle] = React.useState("");
@@ -43,7 +43,7 @@ export default function CreateTodo({
       | React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
-    createTodo(title, desc, img);
+    await createTodo(title, desc, img);
     setTitle("");
     setDesc("");
     setImg(null);
