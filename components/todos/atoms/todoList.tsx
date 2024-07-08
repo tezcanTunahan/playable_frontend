@@ -15,8 +15,8 @@ export default function TodoList({
 }: {
   className?: string;
   todos: Todo[];
-  deleteTodo: ({ id }: { id: string }) => void;
-  changeTodoStatus: ({ id }: { id: string }) => void;
+  deleteTodo: ({ id }: { id: string }) => Promise<void>;
+  changeTodoStatus: ({ id }: { id: string }) => Promise<void>;
 }) {
   return (
     <div className={cn("flex flex-col gap-4", className)}>

@@ -12,8 +12,8 @@ type TodoProps = {
     status: boolean;
     img: string;
   };
-  deleteTodo: ({ id }: { id: string }) => void;
-  changeTodoStatus: ({ id }: { id: string }) => void;
+  deleteTodo: ({ id }: { id: string }) => Promise<void>;
+  changeTodoStatus: ({ id }: { id: string }) => Promise<void>;
 };
 
 export default function Todo({
@@ -33,13 +33,13 @@ export default function Todo({
           id="terms2"
           checked={todo.status}
           className="h-8 w-8"
-          onClick={() => changeTodoStatus({ id: todo._id })}
+          onClick={async () => await changeTodoStatus({ id: todo._id })}
         />
         <Button
           variant="destructive"
           size="icon"
           className=""
-          onClick={() => deleteTodo({ id: todo._id })}
+          onClick={async () => await deleteTodo({ id: todo._id })}
         >
           <CiTrash />
         </Button>
