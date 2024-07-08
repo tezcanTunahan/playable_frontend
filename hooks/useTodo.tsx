@@ -14,20 +14,40 @@ type Todo = {
 export function useTodo() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(false);
-  const fetchTodos = useCallback(async () => {
-    setTodos([]);
-    try {
-      const res = await api.get("/todo");
-      setTodos(res.data);
-      console.log(res.data);
-    } catch (error) {
-      console.error("Error fetching todos:", error);
-    }
-  }, []);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(2);
+  const [search, setSearch] = useState("");
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchTodos = useCallback(
+    async (page: number, limit: number, search: string) => {
+      setTodos([]);
+      try {
+        const res = await api.get(
+          `/todo?page=${page}&limit=${limit}&search=${search}`,
+        );
+        setTodos(res.data.todos);
+        setTotalPages(res.data.totalPages);
+        console.log(res.data);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
-    fetchTodos();
-  }, [fetchTodos]);
+    fetchTodos(page, limit, search);
+  }, [fetchTodos, page, limit, search]);
+
+  function nextPage() {
+    if (page >= totalPages) return;
+    setPage((prev) => prev + 1);
+  }
+  function prevPage() {
+    if (page <= 1) return;
+    setPage((prev) => prev - 1);
+  }
 
   async function createTodo(title: string, desc: string, file: File | null) {
     setLoading(true);
@@ -61,7 +81,7 @@ export function useTodo() {
           img: url,
         })
         .then(() => {
-          fetchTodos();
+          fetchTodos(page, limit, search);
         });
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -72,15 +92,26 @@ export function useTodo() {
 
   function deleteTodo({ id }: { id: string }) {
     api.delete(`/todo/${id}`).then(() => {
-      fetchTodos();
+      fetchTodos(page, limit, search);
     });
   }
 
   function changeTodoStatus({ id }: { id: string }) {
     api.patch(`/todo/${id}`).then(() => {
-      fetchTodos();
+      fetchTodos(page, limit, search);
     });
   }
 
-  return { todos, createTodo, deleteTodo, changeTodoStatus, loading };
+  return {
+    todos,
+    createTodo,
+    deleteTodo,
+    changeTodoStatus,
+    loading,
+    page,
+    nextPage,
+    setSearch,
+    prevPage,
+    totalPages,
+  };
 }
