@@ -22,14 +22,20 @@ export default function TodoList({
 
   return (
     <div className={cn("flex flex-col gap-4", className)}>
-      {todos.map((todo: any, index) => (
-        <Todo
-          key={index}
-          todo={todo}
-          deleteTodo={deleteTodo}
-          changeTodoStatus={changeTodoStatus}
-        />
-      ))}
+      {todos.length > 0 ? (
+        todos.map((todo: any, index) => (
+          <Todo
+            key={index}
+            todo={todo}
+            deleteTodo={deleteTodo}
+            changeTodoStatus={changeTodoStatus}
+          />
+        ))
+      ) : (
+        <div>
+          <p className="p-10 text-center">No todos found</p>
+        </div>
+      )}
     </div>
   );
 }
