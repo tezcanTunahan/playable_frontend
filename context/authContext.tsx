@@ -7,9 +7,10 @@ import {
   useState,
   ReactNode,
 } from "react";
-import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { loginRequest, getUserDetails } from "@/services/authService";
+import api from "@/lib/api";
 
 interface AuthState {
   token: string;
@@ -83,8 +84,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (token) {
         api.defaults.headers.common["Authorization"] = "Bearer " + token;
         try {
-          const res = await api.get("/users/me");
-          setUsername(res.data.username);
+          const userDetails = await getUserDetails();
+          setUsername(userDetails.username);
           setAuthState({ token, authenticated: true });
         } catch (err) {
           logout();
@@ -97,14 +98,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await api.post("/auth/login", { email, password });
-      const token = res.data.accessToken;
-
-      api.defaults.headers.common["Authorization"] = "Bearer " + token;
+      const { token, username } = await loginRequest(email, password);
 
       setAuthState({ token, authenticated: true });
       localStorage.setItem("token", token);
-      setUsername(res.data.username);
+      setUsername(username);
       toast({
         title: "Login",
         description: "Login Successful",
