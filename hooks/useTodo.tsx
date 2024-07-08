@@ -1,8 +1,13 @@
-import api from "@/lib/api";
 import { useCallback, useEffect, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import { toast } from "@/components/ui/use-toast";
+import {
+  fetchTodosRequest,
+  createTodoRequest,
+  deleteTodoRequest,
+  changeTodoStatusRequest,
+} from "@/services/todoService";
 
 type Todo = {
   title: string;
@@ -23,12 +28,10 @@ export function useTodo() {
     async (page: number, limit: number, search: string) => {
       setTodos([]);
       try {
-        const res = await api.get(
-          `/todo?page=${page}&limit=${limit}&search=${search}`,
-        );
-        setTodos(res.data.todos);
-        setTotalPages(res.data.totalPages);
-        console.log(res.data);
+        const data = await fetchTodosRequest(page, limit, search);
+        setTodos(data.todos);
+        setTotalPages(data.totalPages);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
@@ -74,15 +77,8 @@ export function useTodo() {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
       console.log("File available at", url);
-      api
-        .post("/todo", {
-          title,
-          desc,
-          img: url,
-        })
-        .then(() => {
-          fetchTodos(page, limit, search);
-        });
+      await createTodoRequest(title, desc, url);
+      fetchTodos(page, limit, search);
     } catch (error) {
       console.error("Error uploading file:", error);
     } finally {
@@ -90,16 +86,22 @@ export function useTodo() {
     }
   }
 
-  function deleteTodo({ id }: { id: string }) {
-    api.delete(`/todo/${id}`).then(() => {
+  async function deleteTodo({ id }: { id: string }) {
+    try {
+      await deleteTodoRequest(id);
       fetchTodos(page, limit, search);
-    });
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
   }
 
-  function changeTodoStatus({ id }: { id: string }) {
-    api.patch(`/todo/${id}`).then(() => {
+  async function changeTodoStatus({ id }: { id: string }) {
+    try {
+      await changeTodoStatusRequest(id);
       fetchTodos(page, limit, search);
-    });
+    } catch (error) {
+      console.error("Error changing todo status:", error);
+    }
   }
 
   return {
