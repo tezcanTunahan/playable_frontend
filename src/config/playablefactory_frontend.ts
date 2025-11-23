@@ -1,1 +1,1 @@
-export const apiBaseUrl = process.env.BE_API;
+export const apiBaseUrl = process.env.NEXT_PUBLIC_API;

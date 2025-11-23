@@ -120,3 +120,52 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  h1 {
+    @apply text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+  h2 {
+    @apply text-lg font-semibold sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  h3 {
+    @apply text-base font-semibold sm:text-lg md:text-xl lg:text-2xl;
+  }
+  h4 {
+    @apply text-sm font-medium sm:text-base md:text-lg lg:text-xl;
+  }
+  h5 {
+    @apply text-xs font-medium sm:text-sm md:text-base lg:text-lg;
+  }
+  h6 {
+    @apply text-xs font-medium sm:text-sm lg:text-base;
+  }
+
+  p {
+    @apply text-xs font-normal sm:text-sm lg:text-base;
+  }
+
+  small {
+    @apply text-[10px] font-normal sm:text-xs;
+  }
+
+  strong {
+    @apply font-semibold;
+  }
+
+  em {
+    @apply italic;
+  }
+
+  label {
+    @apply text-sm font-medium sm:text-base;
+  }
+
+  li {
+    @apply text-sm font-normal sm:text-base;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}

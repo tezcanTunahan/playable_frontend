@@ -1,12 +1,14 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-
+import { RoleDto } from "@/features/auth/types/token";
 import { queryClient } from "@/lib/queryClient";
 
 type UserState = {
   accessToken: string | null;
   setAccessToken: (token: string) => void;
+  role: RoleDto | null;
+  setRole: (role: RoleDto) => void;
   handleLogOut: () => void;
 };
 
@@ -16,6 +18,8 @@ export const useAuthStore = create(
       return {
         accessToken: null,
         setAccessToken: (accessToken: string) => set({ accessToken }),
+        role: null,
+        setRole: (role: RoleDto) => set({ role }),
         handleLogOut: () => {
           set({ accessToken: null });
           queryClient.clear();

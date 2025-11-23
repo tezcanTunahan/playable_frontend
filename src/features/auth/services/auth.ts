@@ -1,18 +1,18 @@
 import { publicApiRequest } from "@/lib/apiRequest";
 import { AUTH_ENDPOINTS } from "../constants/endpoints";
 import {
-  LoginRequest,
-  LoginResponse,
-  LoginResponseSchema,
+  LoginRequestDto,
+  LoginResponseDto,
+  LoginResponseDtoSchema,
 } from "../types/services";
 
 export const login = async (
-  loginRequest: LoginRequest
-): Promise<LoginResponse> => {
+  loginRequest: LoginRequestDto
+): Promise<LoginResponseDto> => {
   const response = await publicApiRequest({
     url: AUTH_ENDPOINTS.LOGIN,
     data: loginRequest,
     method: "POST",
   });
-  return LoginResponseSchema.parse(response.data);
+  return LoginResponseDtoSchema.parse(response.data);
 };
