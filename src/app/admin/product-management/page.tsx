@@ -1,9 +1,9 @@
-import { CreateProductForm } from "@/features/products/components/createProductForm";
+import { CreateProductSheet } from "@/features/products/components/createProductSheet";
 
 export default function Page() {
   return (
     <div>
-      <CreateProductForm />
+      <CreateProductSheet />
     </div>
   );
 }

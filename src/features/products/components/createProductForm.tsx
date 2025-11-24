@@ -17,10 +17,11 @@ import { useCreateProduct } from "../queries/useProducts";
 
 type Props = {
   className?: string;
+  onSuccess: () => void;
 };
 
-export function CreateProductForm({ className }: Props) {
-  const { mutateAsync } = useCreateProduct();
+export function CreateProductForm({ className, onSuccess }: Props) {
+  const { mutateAsync, isPending } = useCreateProduct();
 
   const form = useForm<ProductRequsetDto>({
     resolver: zodResolver(ProductRequsetDtoSchema),
@@ -34,6 +35,7 @@ export function CreateProductForm({ className }: Props) {
 
   async function onSubmit(values: ProductRequsetDto) {
     await mutateAsync(values);
+    onSuccess();
   }
 
   return (
@@ -99,7 +101,7 @@ export function CreateProductForm({ className }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isPending}>
           add product
         </Button>
       </form>
