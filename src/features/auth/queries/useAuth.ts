@@ -11,7 +11,7 @@ export const useRegister = () => {
   return useMutation({
     mutationFn: register,
     onSuccess: () => {
-      alert("register successfuly time to login");
+      // alert("register successfuly time to login");
     },
   });
 };
@@ -27,7 +27,7 @@ export const useLogin = () => {
       window.location.replace("/");
     },
     onError: () => {
-      alert("user not found or smthng happen !");
+      // alert("user not found or smthng happen !");
       // toast("something went wrong!");
     },
   });
