@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const LoginRequestDtoSchema = z.object({
+export const UserRequestDtoSchema = z.object({
   username: z.string().min(4, {
     message: "Username must be at least 4 characters.",
   }),
@@ -8,7 +8,7 @@ export const LoginRequestDtoSchema = z.object({
     message: "Password must be at least 6 characters.",
   }),
 });
-export type LoginRequestDto = z.infer<typeof LoginRequestDtoSchema>;
+export type UserRequestDto = z.infer<typeof UserRequestDtoSchema>;
 
 export const LoginResponseDtoSchema = z.object({
   accessToken: z.string(),

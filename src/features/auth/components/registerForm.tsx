@@ -13,14 +13,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { UserRequestDto, UserRequestDtoSchema } from "../types/services";
-import { useLogin } from "../queries/useAuth";
+import { useRegister } from "../queries/useAuth";
 
 type Props = {
   className?: string;
 };
 
-export function LoginForm({ className }: Props) {
-  const { mutateAsync } = useLogin();
+export function RegisterForm({ className }: Props) {
+  const { mutateAsync } = useRegister();
   const form = useForm<UserRequestDto>({
     resolver: zodResolver(UserRequestDtoSchema),
     defaultValues: {
@@ -66,7 +66,7 @@ export function LoginForm({ className }: Props) {
           )}
         />
         <Button type="submit" className="w-full">
-          Login
+          Register
         </Button>
       </form>
     </Form>

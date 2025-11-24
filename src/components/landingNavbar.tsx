@@ -31,9 +31,15 @@ export default function LandingNavbar({ className }: Props) {
     >
       <Logo className="" />
 
-      <Button variant={"ghost"} asChild>
-        <Link href={"/login"}>Login</Link>
-      </Button>
+      <div className="flex gap-4">
+        <Button variant={"ghost"} asChild>
+          <Link href={"/login"}>Login</Link>
+        </Button>
+
+        <Button variant={"secondary"} asChild>
+          <Link href={"/register"}>Register</Link>
+        </Button>
+      </div>
     </div>
   );
 }
