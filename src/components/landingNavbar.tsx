@@ -3,15 +3,14 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Logo from "@/components/logo";
-import { useAuthStore } from "@/stores/useAuthStore";
+import Link from "next/link";
 
 type Props = {
   className?: string;
 };
 
-export default function Navbar({ className }: Props) {
+export default function LandingNavbar({ className }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { handleLogOut, role } = useAuthStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,16 +31,9 @@ export default function Navbar({ className }: Props) {
     >
       <Logo className="" />
 
-      <div className="flex gap-4 items-center">
-        <span>{role}</span>
-        <Button
-          onClick={() => {
-            handleLogOut();
-          }}
-        >
-          log out
-        </Button>
-      </div>
+      <Button variant={"ghost"} asChild>
+        <Link href={"/login"}>Login</Link>
+      </Button>
     </div>
   );
 }

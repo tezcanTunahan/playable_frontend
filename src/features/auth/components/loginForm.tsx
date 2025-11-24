@@ -13,14 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { LoginRequestDto, LoginRequestDtoSchema } from "../types/services";
-import { useAuth } from "../queries/useAuth";
+import { useLogin } from "../queries/useAuth";
 
 type Props = {
   className?: string;
 };
 
 export function LoginForm({ className }: Props) {
-  const { useLogin } = useAuth();
   const { mutateAsync } = useLogin();
   const form = useForm<LoginRequestDto>({
     resolver: zodResolver(LoginRequestDtoSchema),

@@ -7,7 +7,7 @@ type Props = {
 
 export default function Logo({ className }: Props) {
   return (
-    <Link href="/" className={cn("font-semibold", className)}>
+    <Link href="/" className={cn("font-semibold max-w-fit ", className)}>
       Playable Factory
     </Link>
   );

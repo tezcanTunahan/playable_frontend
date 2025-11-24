@@ -23,6 +23,7 @@ export const useAuthStore = create(
         handleLogOut: () => {
           set({ accessToken: null });
           queryClient.clear();
+          window.location.replace("/");
         },
       };
     },
