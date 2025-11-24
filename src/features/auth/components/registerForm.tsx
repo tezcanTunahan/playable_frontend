@@ -62,7 +62,7 @@ export function RegisterForm({ className }: Props) {
             <FormItem>
               <FormLabel>password</FormLabel>
               <FormControl>
-                <Input placeholder="********" {...field} />
+                <Input placeholder="********" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
