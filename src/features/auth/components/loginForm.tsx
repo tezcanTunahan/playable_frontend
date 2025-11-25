@@ -14,13 +14,16 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { UserRequestDto, UserRequestDtoSchema } from "../types/services";
 import { useLogin } from "../queries/useAuth";
+import { AxiosError } from "axios";
 
 type Props = {
   className?: string;
 };
 
 export function LoginForm({ className }: Props) {
-  const { mutateAsync } = useLogin();
+  const { mutateAsync, error } = useLogin();
+  const axiosError = error as AxiosError<{ message: string }>;
+
   const form = useForm<UserRequestDto>({
     resolver: zodResolver(UserRequestDtoSchema),
     defaultValues: {
@@ -59,12 +62,15 @@ export function LoginForm({ className }: Props) {
             <FormItem>
               <FormLabel>password</FormLabel>
               <FormControl>
-                <Input placeholder="********" {...field} />
+                <Input placeholder="********" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        <span className="text-red-500">
+          {axiosError && axiosError.response?.data.message}
+        </span>
         <Button type="submit" className="w-full">
           Login
         </Button>

@@ -24,7 +24,7 @@ export default function LandingNavbar({ className }: Props) {
   return (
     <div
       className={cn(
-        "fixed top-0 right-0 left-0 z-20 flex w-full items-center justify-between bg-white px-2 py-2 md:px-5",
+        "fixed top-0 right-0 left-0 z-20 flex w-full items-center justify-between bg-white px-2 py-2  md:px-5",
         isScrolled && "border-b shadow-sm",
         className
       )}
