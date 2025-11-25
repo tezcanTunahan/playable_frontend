@@ -53,6 +53,7 @@ export default function UpdateProduct({ id, open, setOpen }: Props) {
             title: data.title,
             desc: data.desc,
             imgUrl: data.imgUrl,
+            active: data.active,
             stock: data.stock,
             price: data.price,
           }}

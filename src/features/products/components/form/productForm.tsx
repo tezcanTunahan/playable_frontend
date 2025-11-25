@@ -16,6 +16,7 @@ import {
   ProductRequsetDto,
   ProductRequsetDtoSchema,
 } from "../../types/services";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type Props = {
   className?: string;
@@ -54,6 +55,24 @@ export function ProductForm({
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="active"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Active</FormLabel>
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={(checked) => field.onChange(checked)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="desc"

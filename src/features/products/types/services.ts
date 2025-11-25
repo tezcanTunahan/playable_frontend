@@ -5,6 +5,7 @@ export const ProductRequsetDtoSchema = z.object({
   title: z.string().min(3),
   desc: z.string().min(3),
   imgUrl: z.string().min(3),
+  active: z.boolean(),
   stock: z.number().min(1),
   price: z.number().min(1),
 });
@@ -15,6 +16,7 @@ export const ProductResponseSchema = z.object({
   title: z.string(),
   desc: z.string(),
   imgUrl: z.string(),
+  active: z.boolean(),
   price: z.number(),
   stock: z.number(),
   createdAt: z.string(),

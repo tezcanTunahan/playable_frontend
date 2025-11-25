@@ -30,9 +30,7 @@ export default function ProductsTable() {
         <Table className="w-full mb-8">
           <TableHeader>
             <TableRow>
-              <TableHead>
-                <Checkbox />
-              </TableHead>
+              <TableHead>active</TableHead>
               <TableHead>Image</TableHead>
               <TableHead>Title</TableHead>
               <TableHead>Price</TableHead>
@@ -45,7 +43,7 @@ export default function ProductsTable() {
               return (
                 <TableRow key={item._id}>
                   <TableCell>
-                    <Checkbox />
+                    <Checkbox checked={item.active} />
                   </TableCell>
                   <TableCell>
                     <Avatar>

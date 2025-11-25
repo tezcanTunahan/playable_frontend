@@ -51,8 +51,9 @@ export default function CreateProduct({ className }: Props) {
             title: "",
             desc: "",
             imgUrl: "",
-            stock: 1,
-            price: 1,
+            active: true,
+            stock: undefined as unknown as number,
+            price: undefined as unknown as number,
           }}
         />
 
