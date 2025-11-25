@@ -1,4 +1,9 @@
 "use client";
+
+import { useState } from "react";
+import { ProductForm } from "./productForm";
+import { useCreateProduct } from "@/features/products/queries/useProducts";
+import { ProductRequsetDto } from "../../types/services";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,17 +15,21 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { CreateProductForm } from "./createProductForm";
 import { CirclePlus } from "lucide-react";
-import { useState } from "react";
 
 type Props = {
   className?: string;
 };
 
-export function CreateProductSheet({ className }: Props) {
+export default function CreateProduct({ className }: Props) {
   const [open, setOpen] = useState(false);
 
+  const { mutateAsync, isPending } = useCreateProduct();
+
+  async function onSubmit(values: ProductRequsetDto) {
+    await mutateAsync(values);
+    setOpen(false);
+  }
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -34,7 +43,18 @@ export function CreateProductSheet({ className }: Props) {
           <SheetDescription>add product or some stuff...</SheetDescription>
         </SheetHeader>
 
-        <CreateProductForm className="px-4" onSuccess={() => setOpen(false)} />
+        <ProductForm
+          className="px-4"
+          onSubmit={onSubmit}
+          isPending={isPending}
+          defaultValues={{
+            title: "",
+            desc: "",
+            imgUrl: "",
+            stock: 1,
+            price: 1,
+          }}
+        />
 
         <SheetFooter>
           <SheetClose asChild>

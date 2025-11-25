@@ -1,6 +1,8 @@
 import { privateApiRequest } from "@/lib/apiRequest";
 import {
   ProductRequsetDto,
+  ProductResponse,
+  ProductResponseSchema,
   ProductsResponse,
   ProductsResponseSchema,
 } from "../types/services";
@@ -17,6 +19,28 @@ export const createProduct = async (
   });
 };
 
+export const updateProduct = async ({
+  id,
+  productRequsetDto,
+}: {
+  id: string;
+  productRequsetDto: ProductRequsetDto;
+}): Promise<void> => {
+  await privateApiRequest({
+    url: PRODUCTS_ENDPOINTS.BY_ID(id),
+    method: HttpMethod.PUT,
+    data: productRequsetDto,
+  });
+};
+
+export const getProductById = async (id: string): Promise<ProductResponse> => {
+  const response = await privateApiRequest({
+    url: PRODUCTS_ENDPOINTS.BY_ID(id),
+    method: HttpMethod.GET,
+  });
+  return ProductResponseSchema.parse(response.data);
+};
+
 export const getProdcuts = async (
   page: number,
   pageSize: number
@@ -29,6 +53,5 @@ export const getProdcuts = async (
       pageSize,
     },
   });
-
   return ProductsResponseSchema.parse(response.data);
 };

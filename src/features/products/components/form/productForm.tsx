@@ -12,32 +12,28 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { ProductRequsetDto, ProductRequsetDtoSchema } from "../types/services";
-import { useCreateProduct } from "../queries/useProducts";
+import {
+  ProductRequsetDto,
+  ProductRequsetDtoSchema,
+} from "../../types/services";
 
 type Props = {
   className?: string;
-  onSuccess: () => void;
+  onSubmit: (values: ProductRequsetDto) => void;
+  isPending: boolean;
+  defaultValues: ProductRequsetDto;
 };
 
-export function CreateProductForm({ className, onSuccess }: Props) {
-  const { mutateAsync, isPending } = useCreateProduct();
-
+export function ProductForm({
+  className,
+  isPending,
+  onSubmit,
+  defaultValues,
+}: Props) {
   const form = useForm<ProductRequsetDto>({
     resolver: zodResolver(ProductRequsetDtoSchema),
-    defaultValues: {
-      title: "",
-      desc: "",
-      imgUrl: "",
-      stock: 1,
-      price: 1,
-    },
+    defaultValues,
   });
-
-  async function onSubmit(values: ProductRequsetDto) {
-    await mutateAsync(values);
-    onSuccess();
-  }
 
   return (
     <Form {...form}>
@@ -120,7 +116,7 @@ export function CreateProductForm({ className, onSuccess }: Props) {
           )}
         />
         <Button type="submit" className="w-full" disabled={isPending}>
-          add product
+          Save
         </Button>
       </form>
     </Form>

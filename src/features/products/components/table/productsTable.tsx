@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useGetProdcuts } from "@/features/products/queries/useProducts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
-import ProdcutsDropDown from "@/features/products/components/products/prodcutsDropDown";
+import ProdcutsDropDown from "@/features/products/components/table/prodcutsDropDown";
 import { useState } from "react";
 import TablePagination from "./tablePagination";
 
@@ -57,7 +57,7 @@ export default function ProductsTable() {
                   <TableCell>{item.price}</TableCell>
                   <TableCell>{item.desc}</TableCell>
                   <TableCell className="text-right">
-                    <ProdcutsDropDown />
+                    <ProdcutsDropDown id={item._id} />
                   </TableCell>
                 </TableRow>
               );

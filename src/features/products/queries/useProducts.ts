@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createProduct, getProdcuts } from "../services/products";
+import {
+  createProduct,
+  getProdcuts,
+  getProductById,
+  updateProduct,
+} from "../services/products";
 import { toast } from "sonner";
 import { queryClient } from "@/lib/queryClient";
 
@@ -15,9 +20,28 @@ export const useCreateProduct = () => {
   });
 };
 
+export const useUpdateProduct = () => {
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess: () => {
+      toast("product updated succesfuly.");
+      queryClient.invalidateQueries({
+        queryKey: ["prodcuts"],
+      });
+    },
+  });
+};
+
 export const useGetProdcuts = (page: number, pageSize: number) => {
   return useQuery({
     queryKey: ["prodcuts", page, pageSize],
     queryFn: () => getProdcuts(page, pageSize),
+  });
+};
+
+export const useGetProductById = (id: string) => {
+  return useQuery({
+    queryKey: ["product", id],
+    queryFn: () => getProductById(id),
   });
 };
