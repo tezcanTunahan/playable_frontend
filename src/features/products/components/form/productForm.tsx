@@ -89,6 +89,7 @@ export function ProductForm({
               <FormLabel>stock</FormLabel>
               <FormControl>
                 <Input
+                  value={field.value}
                   placeholder="10"
                   type="number"
                   onChange={(e) => field.onChange(e.target.valueAsNumber)}
@@ -108,6 +109,7 @@ export function ProductForm({
                 <Input
                   placeholder="200"
                   type="number"
+                  value={field.value}
                   onChange={(e) => field.onChange(e.target.valueAsNumber)}
                 />
               </FormControl>

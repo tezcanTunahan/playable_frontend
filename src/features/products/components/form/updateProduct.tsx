@@ -27,7 +27,7 @@ export default function UpdateProduct({ id, open, setOpen }: Props) {
   const { mutateAsync, isPending: mutateIsPending } = useUpdateProduct();
   const { data, isPending, isError } = useGetProductById(id);
 
-  if (isPending) return "loading";
+  if (isPending) return;
   if (isError) return "erorr";
 
   async function onSubmit(values: ProductRequsetDto) {
