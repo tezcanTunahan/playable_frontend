@@ -33,6 +33,13 @@ export const updateProduct = async ({
   });
 };
 
+export const deleteProduct = async ({ id }: { id: string }): Promise<void> => {
+  await privateApiRequest({
+    url: PRODUCTS_ENDPOINTS.BY_ID(id),
+    method: HttpMethod.DELETE,
+  });
+};
+
 export const getProductById = async (id: string): Promise<ProductResponse> => {
   const response = await privateApiRequest({
     url: PRODUCTS_ENDPOINTS.BY_ID(id),

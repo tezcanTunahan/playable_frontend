@@ -8,12 +8,15 @@ import {
 import { Ellipsis, Pencil } from "lucide-react";
 import UpdateProduct from "../form/updateProduct";
 import { useState } from "react";
+import { useDeleteProduct } from "../../queries/useProducts";
 
 type Props = {
   id: string;
 };
 
 export default function ProdcutsDropDown({ id }: Props) {
+  const { mutateAsync, isPending } = useDeleteProduct();
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,7 +30,15 @@ export default function ProdcutsDropDown({ id }: Props) {
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Pencil /> update product
           </DropdownMenuItem>
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+          <DropdownMenuItem
+            variant="destructive"
+            onClick={() => {
+              mutateAsync({ id });
+            }}
+            disabled={isPending}
+          >
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
