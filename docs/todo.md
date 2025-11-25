@@ -4,10 +4,6 @@
 
 # TODO List [✔]
 
-[✔] - install axios shadcn zod tanquery maybe zustand
-[✔] - add role base auth system - login register
-[✔] - add protected routes
-
 Customer Features
 
 [ ] - Profile: Implement a simple customer login and registration system, along with profile
@@ -36,10 +32,6 @@ Admin Features
 [ ] - Admin Dashboard: Create an admin dashboard showing key statistics like total sales,
 number of orders, and customer count. Display recent orders and popular products.
 Include simple charts for sales trends and order status distribution.
-
-[✔] - Product and Category Management: Build product management pages where admins
-can add, edit, and delete products. Add bulk actions for activating/deactivating multiple
-products. Stock management should also be added.
 
 [ ] - Bonus - Customer Management: Provide a basic customer listing with search
 functionality and customer detail views showing order history.
