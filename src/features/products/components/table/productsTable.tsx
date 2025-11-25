@@ -8,7 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useGetProdcuts } from "@/features/products/queries/useProducts";
+import {
+  useGetProdcuts,
+  useSetProductActivity,
+} from "@/features/products/queries/useProducts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import ProdcutsDropDown from "@/features/products/components/table/prodcutsDropDown";
@@ -20,7 +23,7 @@ export default function ProductsTable() {
   const [pageSize, setPageSize] = useState(10);
 
   const { data, isPending, isError, refetch } = useGetProdcuts(page, pageSize);
-
+  const { mutateAsync, isPending: isPendingActivity } = useSetProductActivity();
   if (isPending) return "loading";
   if (isError) return <Button onClick={() => refetch()}>try again</Button>;
 
@@ -43,7 +46,17 @@ export default function ProductsTable() {
               return (
                 <TableRow key={item._id}>
                   <TableCell>
-                    <Checkbox checked={item.active} />
+                    <Checkbox
+                      defaultChecked={item.active}
+                      checked={item.active}
+                      disabled={isPendingActivity}
+                      onCheckedChange={() => {
+                        mutateAsync({
+                          id: item._id,
+                          active: !item.active,
+                        });
+                      }}
+                    />
                   </TableCell>
                   <TableCell>
                     <Avatar>

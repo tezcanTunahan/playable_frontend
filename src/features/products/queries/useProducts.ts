@@ -4,6 +4,7 @@ import {
   deleteProduct,
   getProdcuts,
   getProductById,
+  setProductActiviy,
   updateProduct,
 } from "../services/products";
 import { toast } from "sonner";
@@ -26,6 +27,18 @@ export const useUpdateProduct = () => {
     mutationFn: updateProduct,
     onSuccess: () => {
       toast("product updated succesfuly.");
+      queryClient.invalidateQueries({
+        queryKey: ["prodcuts"],
+      });
+    },
+  });
+};
+
+export const useSetProductActivity = () => {
+  return useMutation({
+    mutationFn: setProductActiviy,
+    onSuccess: () => {
+      toast("product activity updated succesfuly.");
       queryClient.invalidateQueries({
         queryKey: ["prodcuts"],
       });
