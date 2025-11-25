@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import { createProduct } from "../services/products";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createProduct, getProdcuts } from "../services/products";
 import { toast } from "sonner";
 
 export const useCreateProduct = () => {
@@ -8,5 +8,12 @@ export const useCreateProduct = () => {
     onSuccess: () => {
       toast("product added succesfuly.");
     },
+  });
+};
+
+export const useGetProdcuts = () => {
+  return useQuery({
+    queryKey: ["prodcuts"],
+    queryFn: getProdcuts,
   });
 };

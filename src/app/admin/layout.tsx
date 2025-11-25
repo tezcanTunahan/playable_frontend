@@ -8,10 +8,8 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
+      <SidebarTrigger />
+      <main className="w-full px-10 ">{children}</main>
     </SidebarProvider>
   );
 }

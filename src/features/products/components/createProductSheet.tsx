@@ -14,13 +14,17 @@ import { CreateProductForm } from "./createProductForm";
 import { CirclePlus } from "lucide-react";
 import { useState } from "react";
 
-export function CreateProductSheet() {
+type Props = {
+  className?: string;
+};
+
+export function CreateProductSheet({ className }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className={className}>
           <CirclePlus /> add product
         </Button>
       </SheetTrigger>

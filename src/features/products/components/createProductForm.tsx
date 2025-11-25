@@ -29,7 +29,8 @@ export function CreateProductForm({ className, onSuccess }: Props) {
       title: "",
       desc: "",
       imgUrl: "",
-      stock: 0,
+      stock: 1,
+      price: 1,
     },
   });
 
@@ -93,6 +94,23 @@ export function CreateProductForm({ className, onSuccess }: Props) {
               <FormControl>
                 <Input
                   placeholder="10"
+                  type="number"
+                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>price</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="200"
                   type="number"
                   onChange={(e) => field.onChange(e.target.valueAsNumber)}
                 />
