@@ -28,7 +28,7 @@ export default function CreateProduct({ className }: Props) {
 
   async function onSubmit(values: ProductRequsetDto) {
     await mutateAsync(values);
-    setOpen(false);
+    // setOpen(false);
   }
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -42,18 +42,21 @@ export default function CreateProduct({ className }: Props) {
           <SheetTitle>Add product</SheetTitle>
           <SheetDescription>add product or some stuff...</SheetDescription>
         </SheetHeader>
-
         <ProductForm
           className="px-4"
           onSubmit={onSubmit}
           isPending={isPending}
           defaultValues={{
-            title: "",
-            desc: "",
-            imgUrl: "",
+            title: "test product",
+            desc: "this is a test prodact delete later",
+            imgUrl:
+              "https://www.adoreoyuncak.com/idea/eg/91/myassets/products/429/76259-01.jpg?revision=1750677446",
             active: true,
-            stock: undefined as unknown as number,
-            price: undefined as unknown as number,
+            category: "food",
+            stock: 10,
+            price: 200,
+            // stock: undefined as unknown as number,
+            // price: undefined as unknown as number,
           }}
         />
 

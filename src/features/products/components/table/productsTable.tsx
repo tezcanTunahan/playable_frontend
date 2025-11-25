@@ -36,8 +36,9 @@ export default function ProductsTable() {
               <TableHead>active</TableHead>
               <TableHead>Image</TableHead>
               <TableHead>Title</TableHead>
-              <TableHead>Price</TableHead>
               <TableHead>Description</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead>Price</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -65,8 +66,9 @@ export default function ProductsTable() {
                     </Avatar>
                   </TableCell>
                   <TableCell>{item.title}</TableCell>
-                  <TableCell>{item.price}</TableCell>
                   <TableCell>{item.desc}</TableCell>
+                  <TableCell>{item.category}</TableCell>
+                  <TableCell>{item.price}</TableCell>
                   <TableCell className="text-right">
                     <ProdcutsDropDown id={item._id} />
                   </TableCell>

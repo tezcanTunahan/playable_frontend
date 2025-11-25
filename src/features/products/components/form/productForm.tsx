@@ -17,6 +17,15 @@ import {
   ProductRequsetDtoSchema,
 } from "../../types/services";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
   className?: string;
@@ -67,6 +76,34 @@ export function ProductForm({
                   checked={field.value}
                   onCheckedChange={(checked) => field.onChange(checked)}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>category</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="tech">tech</SelectItem>
+                      <SelectItem value="food">food</SelectItem>
+                      <SelectItem value="books">books</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
