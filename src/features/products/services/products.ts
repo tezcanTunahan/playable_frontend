@@ -17,10 +17,17 @@ export const createProduct = async (
   });
 };
 
-export const getProdcuts = async (): Promise<ProductsResponse> => {
+export const getProdcuts = async (
+  page: number,
+  pageSize: number
+): Promise<ProductsResponse> => {
   const response = await privateApiRequest({
     url: PRODUCTS_ENDPOINTS.DEFAULT,
     method: HttpMethod.GET,
+    params: {
+      page,
+      pageSize,
+    },
   });
 
   return ProductsResponseSchema.parse(response.data);
