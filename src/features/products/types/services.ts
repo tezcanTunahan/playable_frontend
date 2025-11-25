@@ -1,6 +1,9 @@
 import { PaginatedSchema } from "@/config/types";
 import z from "zod";
 
+export const CategoryDtoSchema = z.enum(["tech", "food", "books"]);
+export type CategoryDto = z.infer<typeof CategoryDtoSchema>;
+
 export const ProductRequsetDtoSchema = z.object({
   title: z.string().min(3),
   desc: z.string().min(3),
@@ -8,6 +11,7 @@ export const ProductRequsetDtoSchema = z.object({
   active: z.boolean(),
   stock: z.number().min(1),
   price: z.number().min(1),
+  category: CategoryDtoSchema,
 });
 export type ProductRequsetDto = z.infer<typeof ProductRequsetDtoSchema>;
 
@@ -18,6 +22,7 @@ export const ProductResponseSchema = z.object({
   imgUrl: z.string(),
   active: z.boolean(),
   price: z.number(),
+  category: CategoryDtoSchema,
   stock: z.number(),
   createdAt: z.string(),
   updatedAt: z.string(),
