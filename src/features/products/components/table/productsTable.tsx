@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import ProdcutsDropDown from "@/features/products/components/table/prodcutsDropDown";
 import { useState } from "react";
-import TablePagination from "./tablePagination";
+import TablePagination from "../../../../components/pagination";
 
 export default function ProductsTable() {
   const [page, setPage] = useState(1);

@@ -24,7 +24,7 @@ type Props = {
   className?: string;
 };
 
-export default function TablePagination({
+export default function Pagination({
   page,
   setPage,
   pageSize,

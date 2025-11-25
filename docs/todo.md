@@ -6,7 +6,7 @@
 
 Customer Features
 
-[ ] - Profile: Implement a simple customer login and registration system, along with profile
+[ ] - Profile: profile
 management for customers. Customers should be able to view their order history.
 
 [ ] - Homepage: Add a category list to navigate category pages. Add at least 2 featured
