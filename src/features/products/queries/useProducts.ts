@@ -58,10 +58,36 @@ export const useDeleteProduct = () => {
   });
 };
 
-export const useGetProdcuts = (page: number, pageSize: number) => {
+export const useGetProdcuts = (
+  page: number,
+  pageSize: number,
+  search: string,
+  minPrice: number,
+  maxPrice: number,
+  sortBy: "price" | "title" | "createdAt",
+  sortOrder: "asc" | "desc"
+) => {
   return useQuery({
-    queryKey: ["prodcuts", page, pageSize],
-    queryFn: () => getProdcuts(page, pageSize),
+    queryKey: [
+      "prodcuts",
+      page,
+      pageSize,
+      search,
+      maxPrice,
+      minPrice,
+      sortBy,
+      sortOrder,
+    ],
+    queryFn: () =>
+      getProdcuts(
+        page,
+        pageSize,
+        search,
+        minPrice,
+        maxPrice,
+        sortBy,
+        sortOrder
+      ),
   });
 };
 

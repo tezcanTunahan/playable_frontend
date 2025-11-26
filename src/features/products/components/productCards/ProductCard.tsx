@@ -8,7 +8,7 @@ export default function ProductCard(productResponse: ProductResponse) {
     <Link href={`products/${productResponse._id}`}>
       <img
         src={productResponse.imgUrl}
-        className="min-h-80"
+        className="min-h-64"
         alt={productResponse.title + " image"}
         width={200}
         height={100}
@@ -18,13 +18,16 @@ export default function ProductCard(productResponse: ProductResponse) {
         }
       />
       <div className="flex  justify-between">
-        <b>{productResponse.title} </b>
+        <b>{productResponse.title}</b>
         <p>{productResponse.price} $</p>
       </div>
       <p className="text-muted-foreground">
         {productResponse.desc.length > 20
           ? productResponse.desc.slice(0, 20) + "..."
           : productResponse.desc}
+      </p>
+      <p className="text-muted-foreground text-xs">
+        {productResponse.category}
       </p>
     </Link>
   );
