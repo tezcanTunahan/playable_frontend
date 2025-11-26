@@ -60,6 +60,7 @@ export default function ProductCards({ className }: Props) {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
+              setPage(0);
             }}
             placeholder="🔎 Search..."
             className="max-w-64"
@@ -70,9 +71,10 @@ export default function ProductCards({ className }: Props) {
           <Label>Category</Label>
           <Select
             value={category}
-            onValueChange={(v: "tech" | "food" | "books" | "all") =>
-              setCatagory(v)
-            }
+            onValueChange={(v: "tech" | "food" | "books" | "all") => {
+              setPage(0);
+              setCatagory(v);
+            }}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Sort by" />
@@ -94,7 +96,10 @@ export default function ProductCards({ className }: Props) {
           </Label>
           <Slider
             value={priceRange}
-            onValueChange={setPriceRange}
+            onValueChange={(val) => {
+              setPriceRange(val);
+              setPage(0);
+            }}
             min={0}
             className="w-64"
             max={1000}
@@ -106,7 +111,10 @@ export default function ProductCards({ className }: Props) {
           <Label>Sort by</Label>
           <Select
             value={sortBy}
-            onValueChange={(v: "price" | "title" | "createdAt") => setSortBy(v)}
+            onValueChange={(v: "price" | "title" | "createdAt") => {
+              setSortBy(v);
+              setPage(0);
+            }}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Sort by" />
@@ -125,7 +133,10 @@ export default function ProductCards({ className }: Props) {
           <Label>Sort direction</Label>
           <Select
             value={sortOrder}
-            onValueChange={(v: "asc" | "desc") => setSortOrder(v)}
+            onValueChange={(v: "asc" | "desc") => {
+              setSortOrder(v);
+              setPage(0);
+            }}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Sort by" />
@@ -146,9 +157,15 @@ export default function ProductCards({ className }: Props) {
         ) : (
           <div className="w-full ">
             <div className="flex flex-row flex-wrap gap-16 mb-8 items-center w-full">
-              {data.data.map((item) => {
-                return <ProductCard key={item._id} {...item} />;
-              })}
+              {data.data.length > 0 ? (
+                data.data.map((item) => {
+                  return <ProductCard key={item._id} {...item} />;
+                })
+              ) : (
+                <div className="w-4xl h-96 flex items-center justify-center">
+                  <h3>No items found...</h3>
+                </div>
+              )}
             </div>
             <TablePagination
               className="w-fit ml-auto"
