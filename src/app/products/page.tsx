@@ -2,8 +2,8 @@ import CardList from "@/features/products/components/productCards/ProductCards";
 
 export default function Page() {
   return (
-    <div>
-      <CardList className="pl-20 my-20 pr-56 mx-auto" />
+    <div className="flex mt-20 w-10/12 mx-auto">
+      <CardList className="" />
     </div>
   );
 }
