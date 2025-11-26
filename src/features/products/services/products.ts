@@ -69,7 +69,8 @@ export const getProdcuts = async (
   minPrice: number,
   maxPrice: number,
   sortBy: "price" | "title" | "createdAt",
-  sortOrder: "asc" | "desc"
+  sortOrder: "asc" | "desc",
+  category: "tech" | "food" | "books" | "all"
 ): Promise<ProductsResponse> => {
   const response = await privateApiRequest({
     url: PRODUCTS_ENDPOINTS.DEFAULT,
@@ -82,6 +83,7 @@ export const getProdcuts = async (
       maxPrice,
       sortBy,
       sortOrder,
+      category,
     },
   });
   return ProductsResponseSchema.parse(response.data);

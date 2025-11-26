@@ -12,9 +12,7 @@ management for customers. Customers should be able to view their order history.
 [ ] - Homepage: Add a category list to navigate category pages. Add at least 2 featured
 product sections like most ordered products, top rated products, etc.
 
-[ ] - Category Product List Page: Include basic filtering by category, price range, and
-product ratings. Add sorting by price, rating, and newest products. Implement a search
-bar with basic search functionality. Include pagination for the product results.
+[ ] - filter product ratings. rating,
 
 [ ] - Product Details: Design product detail pages that include an image gallery, product
 information, pricing, and customer reviews. Incorporate an "Add to Cart" feature, quantity

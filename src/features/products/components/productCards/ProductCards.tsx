@@ -14,10 +14,10 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Props = {
   className?: string;
@@ -34,6 +34,9 @@ export default function ProductCards({ className }: Props) {
     "createdAt"
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [category, setCatagory] = useState<"tech" | "food" | "books" | "all">(
+    "all"
+  );
 
   const { data, isPending, isError, refetch } = useGetProdcuts(
     page,
@@ -42,9 +45,9 @@ export default function ProductCards({ className }: Props) {
     debouncePriceRange[0],
     debouncePriceRange[1],
     sortBy,
-    sortOrder
+    sortOrder,
+    category
   );
-  if (isPending) return "loading";
   if (isError) return <Button onClick={() => refetch()}>try again</Button>;
 
   return (
@@ -62,6 +65,29 @@ export default function ProductCards({ className }: Props) {
             className="max-w-64"
           />
         </div>
+
+        <div className="space-y-2">
+          <Label>Category</Label>
+          <Select
+            value={category}
+            onValueChange={(v: "tech" | "food" | "books" | "all") =>
+              setCatagory(v)
+            }
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="all">all</SelectItem>
+                <SelectItem value="tech">tech</SelectItem>
+                <SelectItem value="food">food</SelectItem>
+                <SelectItem value="books">books</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+
         <div className="flex flex-col gap-4">
           <Label>
             Price range: min: {priceRange[0]}$ - max: {priceRange[1]}$
@@ -113,20 +139,27 @@ export default function ProductCards({ className }: Props) {
           </Select>
         </div>
       </div>
-      <div>
-        <div className="flex flex-row flex-wrap gap-16 mb-8 w-full">
-          {data.data.map((item) => {
-            return <ProductCard key={item._id} {...item} />;
-          })}
-        </div>
-        <TablePagination
-          className="ml-auto w-fit"
-          page={page}
-          pageSize={pageSize}
-          setPage={setPage}
-          setPageSize={setPageSize}
-          totalElements={data.totalElements}
-        />
+      <div className="flex flex-col  gap-16">
+        <h1 className="font-medium">Store</h1>
+        {isPending ? (
+          <Skeleton className="h-screen w-4xl" />
+        ) : (
+          <div className="w-full ">
+            <div className="flex flex-row flex-wrap gap-16 mb-8 items-center w-full">
+              {data.data.map((item) => {
+                return <ProductCard key={item._id} {...item} />;
+              })}
+            </div>
+            <TablePagination
+              className="w-fit ml-auto"
+              page={page}
+              pageSize={pageSize}
+              setPage={setPage}
+              setPageSize={setPageSize}
+              totalElements={data.totalElements}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

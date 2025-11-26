@@ -65,7 +65,8 @@ export const useGetProdcuts = (
   minPrice: number,
   maxPrice: number,
   sortBy: "price" | "title" | "createdAt",
-  sortOrder: "asc" | "desc"
+  sortOrder: "asc" | "desc",
+  category: "tech" | "food" | "books" | "all"
 ) => {
   return useQuery({
     queryKey: [
@@ -77,6 +78,7 @@ export const useGetProdcuts = (
       minPrice,
       sortBy,
       sortOrder,
+      category,
     ],
     queryFn: () =>
       getProdcuts(
@@ -86,7 +88,8 @@ export const useGetProdcuts = (
         minPrice,
         maxPrice,
         sortBy,
-        sortOrder
+        sortOrder,
+        category
       ),
   });
 };

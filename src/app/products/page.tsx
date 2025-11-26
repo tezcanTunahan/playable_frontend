@@ -3,7 +3,7 @@ import CardList from "@/features/products/components/productCards/ProductCards";
 export default function Page() {
   return (
     <div>
-      <CardList className=" px-10 mx-auto" />
+      <CardList className="pl-20 my-20 pr-56 mx-auto" />
     </div>
   );
 }
