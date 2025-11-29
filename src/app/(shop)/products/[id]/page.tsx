@@ -1,7 +1,10 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import AddCart from "@/features/cart/components/addCart";
 import ProductImages from "@/features/product/components/productImages";
 import { useGetProductById } from "@/features/products/queries/useProducts";
+import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function Page() {
@@ -24,6 +27,12 @@ export default function Page() {
           <p>Stock: {data.stock}</p>
 
           <AddCart productId={id} stock={data.stock} />
+          <Button className="w-full" variant={"outline"} asChild>
+            <Link href={"/cart"} className="flex items-center gap-1">
+              <ShoppingCart size={16} />
+              Go to cart
+            </Link>
+          </Button>
         </div>
       </div>
     </div>
