@@ -1,10 +1,11 @@
 "use client";
-import { ArrowRight, Trash } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 /* eslint-disable @next/next/no-img-element */
 
 import { useGetCarts } from "../queries/useCart";
 import { Button } from "@/components/ui/button";
 import DeleteCart from "./deleteCart";
+import CreateOrder from "@/features/order/components/createOrder";
 
 export default function Cart() {
   const { data, isPending, isError } = useGetCarts();
@@ -43,9 +44,7 @@ export default function Cart() {
                 <b>$ {item.product.price}</b>
               </div>
 
-              <div>
-                <DeleteCart id={item.product._id} />
-              </div>
+              <DeleteCart id={item.product._id} />
             </div>
           );
         })}
@@ -54,9 +53,7 @@ export default function Cart() {
       <div className="w-1/2 flex border rounded-2xl  flex-col px-4 py-8 gap-4">
         <h3>Cart details</h3>
         <p>total: {totalPrice}</p>
-        <Button className="w-full ">
-          Contunie <ArrowRight />
-        </Button>
+        <CreateOrder />
       </div>
     </div>
   );

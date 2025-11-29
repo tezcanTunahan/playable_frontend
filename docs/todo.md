@@ -14,8 +14,7 @@ product sections like most ordered products, top rated products, etc.
 [ ] - filter product ratings. rating,
 [ ] - Product Details: customer reviews.
 
-[ ] - Shopping Cart and Checkout: Develop a shopping cart with item management,
-quantity updates, and price calculations, including tax and shipping. Implement a simple
+[ ] - Shopping Cart and Checkout: Implement a simple
 checkout process with shipping address, dummy payment service
 
 [ ] - Customers must not be able to see
@@ -35,8 +34,6 @@ Required Documentation
 [ ] - Create a comprehensive README.md file that includes:
 Project Description Brief overview of what the application does and its main features.
 
-[ ] - Technology Stack: List all technologies, frameworks, and libraries used in the project.
-
 [ ] - Installation Instructions: Step-by-step guide to set up the project locally including Node.js
 version requirements and environment variable configuration.
 
@@ -53,23 +50,14 @@ servers.
 example environment variable files and basic database seeding instructions to help with the
 initial project setup.
 
-Project Deliverables and Timeline
-
-You have 5 days to complete this e-commerce platform. Submit your work through a public
-GitHub repository with clean commit history and meaningful commit messages.
-
 Required Deliverables
-● Complete source code for frontend and backend
 ● Comprehensive README.md documentation
 ● Environment file examples
-● Working application (deployed link preferred but not required)
+● Working application
 
 Optional Bonus Features
 ● Live deployment with a demo link is a huge plus for easy testing
 ● Dockerization
-● Using caching where needed to boost performance by reducing database access times.
-● Order delivery simulation
-● Allowing customers to order without login.
 
 You can implement the last two features however you like, based on your imagination, with any
 features, technologies, or customer notifications.
