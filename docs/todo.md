@@ -6,19 +6,13 @@
 
 Customer Features
 
-[ ] - Profile: Implement a simple customer login and registration system, along with profile
+[ ] - Profile: profile
 management for customers. Customers should be able to view their order history.
 
 [ ] - Homepage: Add a category list to navigate category pages. Add at least 2 featured
 product sections like most ordered products, top rated products, etc.
-
-[ ] - Category Product List Page: Include basic filtering by category, price range, and
-product ratings. Add sorting by price, rating, and newest products. Implement a search
-bar with basic search functionality. Include pagination for the product results.
-
-[ ] - Product Details: Design product detail pages that include an image gallery, product
-information, pricing, and customer reviews. Incorporate an "Add to Cart" feature, quantity
-selection, and basic product specifications.
+[ ] - filter product ratings. rating,
+[ ] - Product Details: customer reviews.
 
 [ ] - Shopping Cart and Checkout: Develop a shopping cart with item management,
 quantity updates, and price calculations, including tax and shipping. Implement a simple

@@ -4,6 +4,9 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Logo from "@/components/logo";
 import { useAuthStore } from "@/stores/useAuthStore";
+import Link from "next/link";
+import { ShoppingCart } from "lucide-react";
+import CartNavButton from "@/features/cart/components/cartNavButton";
 
 type Props = {
   className?: string;
@@ -11,7 +14,7 @@ type Props = {
 
 export default function Navbar({ className }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { handleLogOut, role } = useAuthStore();
+  const { handleLogOut } = useAuthStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +36,7 @@ export default function Navbar({ className }: Props) {
       <Logo className="" />
 
       <div className="flex gap-4 items-center">
-        <span>{role}</span>
+        <CartNavButton />
         <Button
           onClick={() => {
             handleLogOut();

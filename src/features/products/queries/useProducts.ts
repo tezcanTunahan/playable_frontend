@@ -58,10 +58,39 @@ export const useDeleteProduct = () => {
   });
 };
 
-export const useGetProdcuts = (page: number, pageSize: number) => {
+export const useGetProdcuts = (
+  page: number,
+  pageSize: number,
+  search: string,
+  minPrice: number,
+  maxPrice: number,
+  sortBy: "price" | "title" | "createdAt",
+  sortOrder: "asc" | "desc",
+  category: "tech" | "food" | "books" | "all"
+) => {
   return useQuery({
-    queryKey: ["prodcuts", page, pageSize],
-    queryFn: () => getProdcuts(page, pageSize),
+    queryKey: [
+      "prodcuts",
+      page,
+      pageSize,
+      search,
+      maxPrice,
+      minPrice,
+      sortBy,
+      sortOrder,
+      category,
+    ],
+    queryFn: () =>
+      getProdcuts(
+        page,
+        pageSize,
+        search,
+        minPrice,
+        maxPrice,
+        sortBy,
+        sortOrder,
+        category
+      ),
   });
 };
 
@@ -69,5 +98,6 @@ export const useGetProductById = (id: string) => {
   return useQuery({
     queryKey: ["product", id],
     queryFn: () => getProductById(id),
+    enabled: id != "",
   });
 };

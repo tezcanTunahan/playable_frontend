@@ -24,7 +24,7 @@ type Props = {
   className?: string;
 };
 
-export default function TablePagination({
+export default function Pagination({
   page,
   setPage,
   pageSize,
@@ -38,7 +38,10 @@ export default function TablePagination({
       <span className="text-muted-foreground">Rows per page</span>
       <Select
         value={pageSize.toString()}
-        onValueChange={(e) => setPageSize(Number(e))}
+        onValueChange={(e) => {
+          setPageSize(Number(e));
+          setPage(0);
+        }}
       >
         <SelectTrigger className="mr-8" size="sm">
           <SelectValue />
