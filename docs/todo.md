@@ -11,11 +11,8 @@ management for customers. Customers should be able to view their order history.
 
 [ ] - Homepage: Add a category list to navigate category pages. Add at least 2 featured
 product sections like most ordered products, top rated products, etc.
-
 [ ] - filter product ratings. rating,
-
-[ ] - Product Details: customer reviews. Incorporate an "Add to Cart" feature, quantity
-selection,
+[ ] - Product Details: customer reviews.
 
 [ ] - Shopping Cart and Checkout: Develop a shopping cart with item management,
 quantity updates, and price calculations, including tax and shipping. Implement a simple
