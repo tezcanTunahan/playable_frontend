@@ -5,7 +5,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className="">
       <Navbar className="" />
-      <main className="">{children}</main>
+      <main className="mt-20 w-10/12 mx-auto">{children}</main>
     </div>
   );
 }

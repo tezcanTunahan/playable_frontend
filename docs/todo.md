@@ -14,9 +14,8 @@ product sections like most ordered products, top rated products, etc.
 
 [ ] - filter product ratings. rating,
 
-[ ] - Product Details: Design product detail pages that include an image gallery, product
-information, pricing, and customer reviews. Incorporate an "Add to Cart" feature, quantity
-selection, and basic product specifications.
+[ ] - Product Details: customer reviews. Incorporate an "Add to Cart" feature, quantity
+selection,
 
 [ ] - Shopping Cart and Checkout: Develop a shopping cart with item management,
 quantity updates, and price calculations, including tax and shipping. Implement a simple
