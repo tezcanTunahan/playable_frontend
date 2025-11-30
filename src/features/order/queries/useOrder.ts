@@ -6,8 +6,9 @@ import { toast } from "sonner";
 export const useCreateOrder = () => {
   return useMutation({
     mutationFn: createOrder,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart", "orders"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["carts"] });
+      await queryClient.invalidateQueries({ queryKey: ["orders"] });
       toast("order created szuccesfully");
     },
   });
