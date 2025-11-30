@@ -33,7 +33,7 @@ export const useAuthStore = create(
         setItem: (name, value) =>
           Cookies.set(name, value, {
             path: "/",
-            secure: true,
+            secure: false, // https :C
             sameSite: "Strict",
             expires: 30,
           }),
