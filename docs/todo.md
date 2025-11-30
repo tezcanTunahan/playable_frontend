@@ -9,14 +9,6 @@ Customer Features
 [ ] - Profile: profile
 management for customers. Customers should be able to view their order history.
 
-[ ] - Homepage: Add a category list to navigate category pages. Add at least 2 featured
-product sections like most ordered products, top rated products, etc.
-[ ] - filter product ratings. rating,
-[ ] - Product Details: customer reviews.
-
-[ ] - Shopping Cart and Checkout: Implement a simple
-checkout process with shipping address, dummy payment service
-
 [ ] - Customers must not be able to see
 products that are out of stock.
 

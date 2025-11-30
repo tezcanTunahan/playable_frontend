@@ -36,6 +36,10 @@ export default function Navbar({ className }: Props) {
       <Logo className="" />
 
       <div className="flex gap-4 items-center">
+        <Button asChild variant={"outline"}>
+          <Link href={"/user"}>User orders</Link>
+        </Button>
+
         <CartNavButton />
         <Button
           onClick={() => {
