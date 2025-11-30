@@ -1,6 +1,6 @@
 const ORDER_ENDPOINTS = {
   DEFAULT: "/order",
-  //   BY_ID: (id: string) => `/products/${id}`,
+  ADMIN: "/order/admin",
 };
 
 export { ORDER_ENDPOINTS };

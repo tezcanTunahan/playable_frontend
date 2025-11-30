@@ -4,15 +4,6 @@
 
 # TODO List [✔]
 
-Admin Features
-
-[ ] - Admin Dashboard: Create an admin dashboard showing key statistics like total sales,
-number of orders, and customer count. Display recent orders and popular products.
-Include simple charts for sales trends and order status distribution.
-
-[ ] - Bonus - Customer Management: Provide a basic customer listing with search
-functionality and customer detail views showing order history.
-
 Required Documentation
 
 [ ] - Create a comprehensive README.md file that includes:

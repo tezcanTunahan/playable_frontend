@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createOrder, getOrders } from "../services/order";
+import { adminGetOrders, createOrder, getOrders } from "../services/order";
 import { queryClient } from "@/lib/queryClient";
 import { toast } from "sonner";
 
@@ -20,5 +20,12 @@ export const useGetOrders = () => {
   return useQuery({
     queryFn: getOrders,
     queryKey: ["orders"],
+  });
+};
+
+export const useAdminGetOrders = () => {
+  return useQuery({
+    queryFn: adminGetOrders,
+    queryKey: ["adminOrders"],
   });
 };

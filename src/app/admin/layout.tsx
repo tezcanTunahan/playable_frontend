@@ -9,7 +9,7 @@ export default function Layout({ children }: PropsWithChildren) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarTrigger />
-      <main className="w-full px-10 ">{children}</main>
+      <main className="mt-20 w-9/12 mx-auto ">{children}</main>
     </SidebarProvider>
   );
 }

@@ -17,3 +17,11 @@ export const getOrders = async (): Promise<OrdersDto> => {
   });
   return OrdersDtoSchema.parse(response.data);
 };
+
+export const adminGetOrders = async (): Promise<OrdersDto> => {
+  const response = await privateApiRequest({
+    url: ORDER_ENDPOINTS.ADMIN,
+    method: HttpMethod.GET,
+  });
+  return OrdersDtoSchema.parse(response.data);
+};
