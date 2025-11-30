@@ -9,6 +9,8 @@ export const useCreateOrder = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["carts"] });
       await queryClient.invalidateQueries({ queryKey: ["orders"] });
+      await queryClient.invalidateQueries({ queryKey: ["product"] });
+
       toast("order created szuccesfully");
     },
   });

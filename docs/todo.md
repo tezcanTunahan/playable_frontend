@@ -4,14 +4,6 @@
 
 # TODO List [✔]
 
-Customer Features
-
-[ ] - Profile: profile
-management for customers. Customers should be able to view their order history.
-
-[ ] - Customers must not be able to see
-products that are out of stock.
-
 Admin Features
 
 [ ] - Admin Dashboard: Create an admin dashboard showing key statistics like total sales,
