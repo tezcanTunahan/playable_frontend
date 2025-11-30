@@ -22,7 +22,16 @@ export default function ProductsTable() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const { data, isPending, isError, refetch } = useGetProdcuts(page, pageSize);
+  const { data, isPending, isError, refetch } = useGetProdcuts(
+    page,
+    pageSize,
+    "",
+    0,
+    1000,
+    "createdAt",
+    "desc",
+    "all"
+  );
   const { mutateAsync, isPending: isPendingActivity } = useSetProductActivity();
   if (isPending) return "loading";
   if (isError) return <Button onClick={() => refetch()}>try again</Button>;
@@ -79,7 +88,7 @@ export default function ProductsTable() {
         </Table>
       </div>
       <TablePagination
-        className="ml-auto w-fit"
+        className="ml-auto w-fit mb-16"
         page={page}
         pageSize={pageSize}
         setPage={setPage}

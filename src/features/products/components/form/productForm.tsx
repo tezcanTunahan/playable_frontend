@@ -48,7 +48,7 @@ export function ProductForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("flex flex-col gap-4", className)}
+        className={cn("flex flex-col gap-2", className)}
       >
         <FormField
           control={form.control}
